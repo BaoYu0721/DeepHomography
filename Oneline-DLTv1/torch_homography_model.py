@@ -40,7 +40,7 @@ def build_model(model_name, pretrained=False):
 
     if pretrained == True:
         exclude_dict = ['conv1.weight','fc.weight','fc.bias']
-        pretrained_dict = model_zoo.load_url(model_urls[model_name])
+        pretrained_dict = model_zoo.load_url(model_urls[model_name], model_dir='/mnt/lustre/baoyu/DeepHomography/models')
         model_dict = model.state_dict()
 
         pretrained_dict = {k: v for k, v in pretrained_dict.items() if k not in exclude_dict}
