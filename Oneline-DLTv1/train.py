@@ -43,7 +43,8 @@ def train(args):
     net = build_model(args.model_name, pretrained=args.pretrained)
 
     if args.finetune:
-        model_path = os.path.join(exp_name, 'models/freeze-mask-first-fintune.pth')
+        # model_path = os.path.join(exp_name, 'models/freeze-mask-first-fintune.pth')
+        model_path = os.path.join(exp_name, 'train_log_Oneline-FastDLT/real_models/resnet34_iter_272000.pth')
         print(model_path)
         state_dict = torch.load(model_path, map_location='cpu')
         # create new OrderedDict that does not contain `module.`
@@ -80,7 +81,6 @@ def train(args):
         loss_sigma = 0.0
         loss_sigma_feature = 0.0
 
-        scheduler.step()  # Note: The initial learning rate should be 1e-4. torch_version==1.0.1 ->init lr == 0.0001; torch_version>=1.2.0 ->init lr == 0.0001*1.25?
         print(epoch, 'lr={:.6f}'.format(scheduler.get_lr()[0]))
         for i, batch_value in enumerate(train_loader):
             # save model
@@ -154,6 +154,7 @@ def train(args):
                                           triMask, loss_map, writer)
             writer.add_scalars('Loss_group', {'feature_loss': loss_feature.item()}, glob_iter)
             writer.add_scalar('learning rate', scheduler.get_lr()[0], glob_iter)
+        scheduler.step()  # Note: The initial learning rate should be 1e-4. torch_version==1.0.1 ->init lr == 0.0001; torch_version>=1.2.0 ->init lr == 0.0001*1.25?
 
     print('Finished Training')
 
