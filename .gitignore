@@ -1,3 +1,5 @@
 Data/Coordinate/*
 Data/Test/*
 Data/Train/*
+Oneline-DLTv1/logs/*
+Oneline-DLTv1/__pycache__/*
