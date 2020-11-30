@@ -44,7 +44,7 @@ def train(args):
 
     if args.finetune:
         # model_path = os.path.join(exp_name, 'models/freeze-mask-first-fintune.pth')
-        model_path = os.path.join(exp_name, 'train_log_Oneline-FastDLT/real_models/resnet34_iter_272000.pth')
+        model_path = os.path.join(exp_name, 'train_log_Oneline-FastDLT/real_models_pre/resnet34_iter_72000.pth')
         print(model_path)
         state_dict = torch.load(model_path, map_location='cpu')
         # create new OrderedDict that does not contain `module.`
